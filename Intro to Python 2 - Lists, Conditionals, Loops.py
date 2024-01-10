@@ -292,7 +292,7 @@ i = 0
 while i < len(list_6):
     print(list_6[i])
     i += 1
-    
+
 
 # %% [markdown]
 # # Assignment
@@ -329,6 +329,6 @@ while i < len(numbers)/2:
     i += 1
     
 print(numbers)
-    
+
 
 # %%

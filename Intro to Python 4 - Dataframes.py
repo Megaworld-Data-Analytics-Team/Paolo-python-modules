@@ -57,14 +57,14 @@ df
 # Typically, larger datasets will come in the format of CSV files. We can convert these files into dataframes and have them analyzed within Python. Use the `sample_data.csv` file and convert it into a dataframe. (**Note**: make sure the file is in the same directory/folder as this notebook)
 
 # %%
-sample_df = pd.read_csv('sample_data.csv')
+sample_df = pd.read_csv('input/sample_data.csv')
 sample_df
 
 # %% [markdown]
 # Our dataset appears to have a built in column for row indexing. This creates redundant data. Similar to how we did **list/string splicing**, we can remove the first column read from the CSV file.
 
 # %%
-sample_df = pd.read_csv('sample_data.csv').iloc[: , 1:]
+sample_df = pd.read_csv('input/sample_data.csv').iloc[: , 1:]
 
 # head() displays only the first 5 rows of data
 sample_df.head()
@@ -76,7 +76,7 @@ sample_df.head()
 # Let's get a larger dataset to work on. The [San Francisco Building Permits dataset](https://www.kaggle.com/datasets/aparnashastry/building-permit-applications-data) is a public record of structural permits from Jan 1, 2013-Feb 25th 2018. For simplicity, some of the columns of the dataset have been removed.
 
 # %%
-bld_df = pd.read_csv('Building_Permits.csv').iloc[:,:-20]
+bld_df = pd.read_csv('input/Building_Permits.csv').iloc[:,:-20]
 bld_df.head()
 
 # %% [markdown]
@@ -441,7 +441,7 @@ buyer_names = list(map(lambda n:"Buyer " + str(n), np.arange(25)))
 names_df = pd.DataFrame({'Buyer ID': np.arange(25),
                          'Buyer Name': buyer_names})
 
-sample_df = pd.read_csv('sample_data.csv')
+sample_df = pd.read_csv('input/sample_data.csv')
 
 # %%
 df2 = sample_df.iloc[:, 1:]
@@ -456,7 +456,7 @@ df2 = df2.dropna(subset = ['Township','Product Type'])
 df2.head()
 
 # %%
-# df2.to_csv('new.csv',  index=False)
+df2.to_csv('new.csv',  index=False)
 
 # %%
 df2.groupby(['Township', 'Product Type']).count()['Property']

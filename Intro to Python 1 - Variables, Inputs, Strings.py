@@ -16,6 +16,8 @@
 # %% [markdown]
 # # Running your first Python script
 # Your first python script is simple. This line of code runs the `print()` function which displays any text written inside. Select the code block below and run it.
+#
+# ![how to run code](https://i.imgur.com/z10no90.png)
 
 # %%
 print("hello!")

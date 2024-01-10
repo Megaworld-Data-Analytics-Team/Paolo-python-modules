@@ -175,7 +175,7 @@ plt.close()
 # The following are a scatter plot and correlation heatmap using attributes of the [Iris dataset](https://www.kaggle.com/datasets/uciml/iris). Showing any potential relationships in the physical traits of the Iris species. 
 
 # %%
-iris_df = pd.read_csv('Iris.csv')
+iris_df = pd.read_csv('input/Iris.csv')
 iris_df.info()
 
 x = iris_df["SepalLengthCm"]
@@ -227,7 +227,7 @@ import plotly.graph_objects as go
 import plotly.io as pio
 
 # %%
-times_df = pd.read_csv("univ_ranks/timesData.csv")
+times_df = pd.read_csv("input/timesData.csv")
 times_df.info()
 
 # %%
@@ -323,7 +323,14 @@ pio.show(fig)
 # Traces do not have to be of the same type for the figure to function but this may lead to incompatible or messy visualizations.
 
 # %%
-# trace3 is a Scatter trace taken from the previous block of code
+trace3 = go.Scatter(
+                    x = df.world_rank,
+                    y = df.teaching,
+                    mode = "lines+markers",
+                    name = "teaching",
+                    marker = dict(color = 'black'),
+                    text= df.university_name)
+
 # mixes bar traces and scatter traces
 data = [trace1, trace2, trace3]
 
@@ -385,6 +392,40 @@ pio.show(fig)
 #     - Use color to differentiate and highlight data points. Use it to convey additional information that enables viewers to digest the visualization at a glance. 
 #     - Structure the data to tell a clear narrative. 
 
+# %% [markdown]
+# # Assignment
+# Using the CSV file generated from the last assignment, generate a donut chart and bar chart showing the __number of properties per Township__. The code for generating the table to be used for visualization has been written for you.
+
 # %%
+df = pd.read_csv('new.csv')
+
+count_df = df.groupby(['Township']).count()['Property']
+count_df = count_df.reset_index()
+count_df
+
+# %%
+#list of named colors found here: https://xkcd.com/color/rgb/
+colors = ['saddlebrown', 'wheat', 'crimson', 'blue']
+
+fig, axes = plt.subplots(1, 2, figsize=(16,8))
+fig.suptitle("Properties per Township", fontsize=24)
+
+ax1, ax2 = axes
+
+#bar chart labelling
+ax1.set_ylabel("Number of Properties", fontsize=12)
+ax1.set_xlabel("Township", fontsize=18)
+
+#pie chart labelling
+ax2.set_ylabel("Township", fontsize=12)
+ax2.set_xlabel("Township", fontsize=18)
+
+fig.tight_layout(pad=2)
+
+ax1.barh(count_df['Township'], count_df['Property'], edgecolor='black')
+ax2.pie(count_df['Property'], labels=count_df['Township'], colors=colors, wedgeprops={'width': 0.2}, startangle=90)
+
+plt.show() 
+plt.close()
 
 # %%
